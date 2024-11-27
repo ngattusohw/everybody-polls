@@ -1,0 +1,38 @@
+{
+  "name": "global-polls",
+  "main": "src/app.ts",
+  "version": "1.0.0",
+  "private": true,
+  "dependencies": {
+    "@nativescript/core": "8.5.0",
+    "@nativescript/firebase-analytics": "3.1.1",
+    "@nativescript/firebase-auth": "3.1.1",
+    "@nativescript/firebase-core": "3.1.1",
+    "@nativescript/firebase-database": "3.1.1",
+    "@nativescript/firebase-messaging": "3.1.1",
+    "@nativescript/theme": "3.0.2",
+    "@react-navigation/core": "6.4.10",
+    "react": "18.2.0",
+    "react-nativescript": "5.0.0",
+    "react-nativescript-navigation": "5.0.0"
+  },
+  "devDependencies": {
+    "@nativescript/android": "8.5.0",
+    "@nativescript/ios": "8.5.0",
+    "@nativescript/preview-cli": "^1.0.14",
+    "@nativescript/stackblitz": "0.0.8",
+    "@nativescript/tailwind": "2.0.1",
+    "@nativescript/types": "8.5.0",
+    "@nativescript/webpack": "5.0.13",
+    "@types/react": "npm:types-react-without-jsx-intrinsics@18.0.17",
+    "typescript": "5.0.4"
+  },
+  "scripts": {
+    "preview": "ns preview",
+    "android": "ns run android",
+    "ios": "ns run ios"
+  },
+  "stackblitz": {
+    "startCommand": "setup-nativescript-stackblitz && ns preview"
+  }
+}
