@@ -1,3 +1,11 @@
+// import * as React from "react";
+// // import { simpleTabViewNavigatorTest } from "./SimpleTabViewNavigator";
+// import { simpleStackNavigatorTest } from "./SimpleStackViewNavigator";
+
+// const AppContainer = simpleStackNavigatorTest;
+
+// export default AppContainer;
+
 import * as React from 'react';
 import { BaseNavigationContainer } from '@react-navigation/core';
 import { stackNavigatorFactory } from "react-nativescript-navigation";
@@ -6,7 +14,7 @@ import { PollDetailScreen } from '../screens/PollDetailScreen';
 
 const StackNavigator = stackNavigatorFactory();
 
-export function AppContainer() {
+const AppContainer = () => {
   return (
     <BaseNavigationContainer>
       <StackNavigator.Navigator
@@ -36,3 +44,4 @@ export function AppContainer() {
     </BaseNavigationContainer>
   );
 }
+export default AppContainer;

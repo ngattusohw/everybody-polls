@@ -1,8 +1,19 @@
 import * as React from 'react';
-import { ScrollView, FlexboxLayout, Label, Button, StackLayout } from '@nativescript/core';
+import { RouteProp } from '@react-navigation/core';
+import { FrameNavigationProp } from "react-nativescript-navigation";
 import { Poll } from '../types';
 
-export function PollDetailScreen({ route }) {
+type SimpleStackParamList = {
+  home: {},
+  pollDetail: {},
+};
+
+type PollDetailScreenProps = {
+  route: RouteProp<SimpleStackParamList, "pollDetail">,
+  navigation: FrameNavigationProp<SimpleStackParamList, "pollDetail">,
+}
+
+export function PollDetailScreen({ navigation }: PollDetailScreenProps) {
   const [poll, setPoll] = React.useState<Poll | null>(null);
   const [selectedOption, setSelectedOption] = React.useState('');
   const [activeTab, setActiveTab] = React.useState('poll');
@@ -24,39 +35,38 @@ export function PollDetailScreen({ route }) {
   if (!poll) return null;
 
   return (
-    <ScrollView>
-      <StackLayout className="p-4">
-        <Label className="text-2xl mb-4" text={poll.question} />
+      <stackLayout className="p-4">
+        <label className="text-2xl mb-4" text={poll.question} />
         
-        <FlexboxLayout className="mb-4">
-          <Button 
+        <flexboxLayout className="mb-4">
+          <button 
             className={`mr-2 ${activeTab === 'poll' ? 'bg-blue-500 text-white' : 'bg-gray-200'}`}
             text="Poll"
             onTap={() => setActiveTab('poll')}
           />
-          <Button 
+          <button 
             className={`mr-2 ${activeTab === 'results' ? 'bg-blue-500 text-white' : 'bg-gray-200'}`}
             text="Results"
             onTap={() => setActiveTab('results')}
           />
-          <Button 
+          <button 
             className={activeTab === 'discussion' ? 'bg-blue-500 text-white' : 'bg-gray-200'}
             text="Discussion"
             onTap={() => setActiveTab('discussion')}
           />
-        </FlexboxLayout>
+        </flexboxLayout>
 
         {activeTab === 'poll' && (
-          <StackLayout className="mb-4">
+          <stackLayout className="mb-4">
             {poll.options.map((option, index) => (
-              <Button
+              <button
                 key={index}
                 className={`mb-2 ${selectedOption === option ? 'bg-blue-500 text-white' : 'bg-gray-200'}`}
                 text={option}
                 onTap={() => setSelectedOption(option)}
               />
             ))}
-            <Button
+            <button
               className="bg-green-500 text-white"
               text="Submit Vote"
               isEnabled={!!selectedOption}
@@ -65,9 +75,8 @@ export function PollDetailScreen({ route }) {
                 console.log('Voted for:', selectedOption);
               }}
             />
-          </StackLayout>
+          </stackLayout>
         )}
-      </StackLayout>
-    </ScrollView>
+      </stackLayout>
   );
 }

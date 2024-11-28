@@ -1,11 +1,20 @@
 import * as React from 'react';
-import { ScrollView, FlexboxLayout, Label, Button } from '@nativescript/core';
-import { useNavigation } from '@react-navigation/native';
+import { RouteProp } from '@react-navigation/core';
+import { FrameNavigationProp } from "react-nativescript-navigation";
 import { Poll } from '../types';
 
-export function HomeScreen() {
+type SimpleStackParamList = {
+  home: {},
+  pollDetail: {},
+};
+
+type HomeScreenProps = {
+  route: RouteProp<SimpleStackParamList, "home">,
+  navigation: FrameNavigationProp<SimpleStackParamList, "home">,
+}
+
+export function HomeScreen({ navigation }: HomeScreenProps) {
   const [activePolls, setActivePolls] = React.useState<Poll[]>([]);
-  const navigation = useNavigation();
 
   React.useEffect(() => {
     // Fetch polls implementation will go here
@@ -25,25 +34,27 @@ export function HomeScreen() {
   }, []);
 
   return (
-    <ScrollView className="p-4">
-      <Label className="text-2xl mb-4 font-bold">Active Polls</Label>
+    // <ScrollView className="p-4">
+    <>
+      <label className="text-2xl mb-4 font-bold">Active Polls</label>
       {activePolls.map(poll => (
-        <FlexboxLayout 
+        <flexboxLayout 
           key={poll.id} 
           className="bg-white p-4 rounded-lg mb-4 shadow"
           flexDirection="column"
         >
-          <Label className="text-xl mb-2">{poll.question}</Label>
-          <Label className="mb-4">
+          <label className="text-xl mb-2">{poll.question}</label>
+          <label className="mb-4">
             Ends: {poll.endDate.toLocaleDateString()}
-          </Label>
-          <Button
+          </label>
+          <button
             className="bg-blue-500 text-white p-2 rounded"
             text="Vote Now"
             onTap={() => navigation.navigate('PollDetail', { pollId: poll.id })}
           />
-        </FlexboxLayout>
+        </flexboxLayout>
       ))}
-    </ScrollView>
+      </>
+    // </ScrollView>
   );
 }
